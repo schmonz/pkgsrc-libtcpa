@@ -1,0 +1,16 @@
+$NetBSD: patch-aa,v 1.4 2020/10/26 10:04:12 schmonz Exp $
+
+Respect CFLAGS and LDFLAGS.
+
+--- examples/Makefile.orig	Mon May 19 15:35:20 2003
++++ examples/Makefile
+@@ -1,7 +1,5 @@
+-AR = ar
+-RM = rm
+-CC = gcc -I../libtcpa -DTPMLOG=NULL
+-LIBS = ../libtcpa/libtcpa.a -lcrypto
++CC = gcc -I../libtcpa -DTPMLOG=NULL ${CFLAGS}
++LIBS = ../libtcpa/libtcpa.a -lcrypto ${LDFLAGS}
+ 
+ all: tcpa_demo takeown createkey loadkey evictkey signfile \
+      verifyfile sealfile unsealfile
